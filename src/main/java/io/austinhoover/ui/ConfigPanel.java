@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,8 +34,12 @@ public class ConfigPanel extends JPanel {
 
     /**
      * Number of rows by default
+     *  - Company name
+     *  - Role Title
+     *  - Date checkbox
+     *  - Submit button
      */
-    private static final int DEFAULT_ROWS = 3;
+    private static final int DEFAULT_ROWS = 4;
 
     /**
      * Name of the company
@@ -44,6 +50,11 @@ public class ConfigPanel extends JPanel {
      * Title of the job
      */
     public static final String KEY_ROLE_TITLE = "roleTitle";
+
+    /**
+     * Date of listing
+     */
+    public static final String KEY_DATE = "date";
 
     /**
      * Font size to generate with
@@ -74,6 +85,11 @@ public class ConfigPanel extends JPanel {
      * UI String for role title input
      */
     private static final String UI_STRING_ROLE_TITLE = "Role Title";
+
+    /**
+     * UI String for date checkbox
+     */
+    private static final String UI_STRING_DATE = "Include Date?";
 
     /**
      * UI String for save button
@@ -123,6 +139,18 @@ public class ConfigPanel extends JPanel {
             this.add(subPanel);
             data.put(ConfigPanel.KEY_ROLE_TITLE, ConfigPanel.UI_STRING_ROLE_TITLE);
         }
+        {
+            JPanel subPanel = new JPanel();
+            subPanel.add(new JLabel(ConfigPanel.UI_STRING_DATE));
+            JCheckBox checkBox = new JCheckBox();
+            checkBox.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+                data.put(ConfigPanel.KEY_DATE, checkBox.isSelected());
+            }});
+            checkBox.setSelected(true); //date is included by default
+            subPanel.add(checkBox);
+            this.add(subPanel);
+            data.put(ConfigPanel.KEY_DATE, true);
+        }
 
         //generate main options
         for(String key : config.getContentMap().keySet()){
@@ -163,6 +191,15 @@ public class ConfigPanel extends JPanel {
                 contentStream.beginText();
                 contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), FONT_SIZE);
                 contentStream.newLineAtOffset(MARGIN_LEFT, bounds.getHeight() - MARGIN_LEFT);
+
+                //date
+                {
+                    if((Boolean)data.get(ConfigPanel.KEY_DATE) == true){
+                        contentStream.newLineAtOffset(0,-FONT_SIZE);
+                        String dateString = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+                        ConfigPanel.writeParagraph(contentStream, dateString);
+                    }
+                }
 
                 //intro paragraph
                 {

@@ -51,6 +51,7 @@ public class App {
         String[] reservedKeys = new String[]{
             ConfigPanel.KEY_COMPANY_NAME,
             ConfigPanel.KEY_ROLE_TITLE,
+            ConfigPanel.KEY_DATE,
         };
         for(String reservedKey : reservedKeys){
             if(config.getContentMap().containsKey(reservedKey)){
