@@ -139,6 +139,8 @@ public class ConfigPanel extends JPanel {
             this.add(subPanel);
             data.put(ConfigPanel.KEY_ROLE_TITLE, ConfigPanel.UI_STRING_ROLE_TITLE);
         }
+
+        //option to include date or not
         {
             JPanel subPanel = new JPanel();
             subPanel.add(new JLabel(ConfigPanel.UI_STRING_DATE));
@@ -192,6 +194,16 @@ public class ConfigPanel extends JPanel {
                 contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), FONT_SIZE);
                 contentStream.newLineAtOffset(MARGIN_LEFT, bounds.getHeight() - MARGIN_LEFT);
 
+                //name and contact data
+                {
+                    ConfigPanel.writeParagraph(contentStream, config.getName());
+                    ConfigPanel.writeParagraph(contentStream, config.getEmail());
+                    ConfigPanel.writeParagraph(contentStream, config.getPhone());
+                    if(config.getLinkedin() != null && !config.getLinkedin().equals("")){
+                        ConfigPanel.writeParagraph(contentStream, config.getLinkedin());
+                    }
+                }
+
                 //date
                 {
                     if((Boolean)data.get(ConfigPanel.KEY_DATE) == true){
@@ -199,6 +211,14 @@ public class ConfigPanel extends JPanel {
                         String dateString = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
                         ConfigPanel.writeParagraph(contentStream, dateString);
                     }
+                }
+
+                //greeting
+                {
+                    contentStream.newLineAtOffset(0,-FONT_SIZE);
+                    String introParaText = config.getGreeting();
+                    String introParaWrapped = WordUtils.wrap(introParaText, wrapSize, "\n", true).replace("\t", "        ");
+                    ConfigPanel.writeParagraph(contentStream, introParaWrapped);
                 }
 
                 //intro paragraph

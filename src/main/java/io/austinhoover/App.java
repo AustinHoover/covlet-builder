@@ -65,11 +65,20 @@ public class App {
         if(config.getName() == null || config.getName().equals("")){
             throw new Error("Name is empty");
         }
+        if(config.getEmail() == null || config.getEmail().equals("")){
+            throw new Error("Email is empty");
+        }
+        if(config.getPhone() == null || config.getPhone().equals("")){
+            throw new Error("Phone number is empty");
+        }
         if(config.getIntroParagraph() == null || config.getIntroParagraph().equals("")){
             throw new Error("Intro paragraph is empty");
         }
         if(config.getClosingPhrase() == null || config.getClosingPhrase().equals("")){
             throw new Error("Closing phrase is empty");
+        }
+        if(config.getGreeting() == null || config.getGreeting().equals("")){
+            throw new Error("Greeting is empty");
         }
     }
 }

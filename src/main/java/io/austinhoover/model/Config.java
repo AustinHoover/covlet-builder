@@ -14,6 +14,11 @@ public class Config {
     private Map<String,String> contentMap = new HashMap<String,String>();
 
     /**
+     * The greeintg (eg "Dear Hiring Manager,")
+     */
+    private String greeting;
+
+    /**
      * The intro paragraph's content
      */
     private String introParagraph;
@@ -22,6 +27,21 @@ public class Config {
      * The name of the person to generate a cover letter for
      */
     private String name;
+
+    /**
+     * Email of the person to generate a cover letter for
+     */
+    private String email;
+
+    /**
+     * Phone number of the person to generate a cover letter for
+     */
+    private String phone;
+
+    /**
+     * Your linkedin url (optional!)
+     */
+    private String linkedin;
 
     /**
      * The closing phrase of the letter (eg "Sincerely,", "Thank you,", etc)
@@ -58,6 +78,38 @@ public class Config {
      */
     public String getClosingPhrase(){
         return closingPhrase;
+    }
+
+    /**
+     * Gets the greeting string
+     * @return The greeting string
+     */
+    public String getGreeting() {
+        return greeting;
+    }
+
+    /**
+     * Gets the email address to include
+     * @return The email address
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Gets the phone number to include
+     * @return The phone number
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * Gets the linkedin url to use
+     * @return The linkedin url
+     */
+    public String getLinkedin(){
+        return linkedin;
     }
 
 }

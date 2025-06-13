@@ -1,5 +1,9 @@
 {
     "name" : "Austin Hoover",
+    "email" : "some@email.com",
+    "phone" : "123-456-7890",
+    "linkedin" : "some linkedin url.com",
+    "greeting" : "Dear Hiring Manager,",
     "introParagraph" : "\tI'm writing to apply for the roleTitle role at companyName. I have considerable Java and Python experience that would make me a valuable addition to your team.",
     "closingPhrase" : "Sincerely,",
     "contentMap" : {
